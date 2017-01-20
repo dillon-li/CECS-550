@@ -63,11 +63,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      $confirm_code = str_random(30);
         return User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'confirm_code' => $confirm_code,
         ]);
+
+        Mail::send('email.verify', $confirmation_code, function($message) {
+            $message->to(Input::get('email'), Input::get('username'))
+                ->subject('Verify your email address');
+        });
     }
 }
