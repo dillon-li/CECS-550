@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'account'], function(){
+  Route::get('/', 'AccountController@index');
+  Route::get('/address', 'AccountController@addAddressPage');
+  Route::post('address/add', 'AccountController@addAddress');
+});

@@ -76,6 +76,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .welcome_msg {
+              font-weight:bold;
+            }
         </style>
     </head>
     <body>
@@ -96,6 +100,14 @@
                     Cardinal Gear Shop
                 </div>
 
+                <div class="welcome_msg">
+                  @if(Auth::guest())
+                    <a href="{{ url('/register') }}">Click here to register</a>
+                  @else
+                    You are signed in!
+                  @endif
+                </div>
+                <!--
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -103,6 +115,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+              -->
             </div>
         </div>
     </body>

@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('confirmed')->default(0);
             $table->string('confirm_code')->nullable();
+            $table->string('stripe_token', 50)->nullable();
+      			$table->string('stripe_id', 40)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
