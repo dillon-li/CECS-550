@@ -25,11 +25,18 @@ class AccountController extends Controller
   public function index(Request $request)
   {
     $user = User::Where('username', $request->User()->username)->first();
-    $shipping = Address::Where('userID', $user->id)->first();
-
+    $shipping = Address::Where('userID', $user->id)->get();
+    if ($shipping != NULL)
+    {
+      $address_exists = true;
+    }
+    else {
+      $address_exists = false;
+    }
     $details = [
       'user' => $user,
-      'shipping' => $shipping
+      'shipping' => $shipping,
+      'address_exists' => $address_exists
     ];
     return view('account.index')->with($details);
   }
@@ -49,7 +56,7 @@ class AccountController extends Controller
 
     Address::create(
       [
-        'userID' => $request->user()->id, 
+        'userID' => $request->user()->id,
         'street' => $request->street,
         'city' => $request->city,
         'state' => $request->state,

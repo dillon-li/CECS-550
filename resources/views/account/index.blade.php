@@ -24,7 +24,7 @@
                           {{$user->email}}
                       </div>
 
-                      @if ($shipping->count() == 0)
+                      @if (!$address_exists)
                       <div class="form-group">
                         <label for="zipcode" class="col-md-4 control-label">Address</label>
                           <a href="/account/address">Add a shipping address</a>
@@ -37,7 +37,7 @@
     </div>
 </div>
 
-@if ($shipping->count() > 0)
+@if ($address_exists)
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -47,17 +47,17 @@
                 <div class="panel-body">
                   <div class="form-group">
                     <label for="street" class="col-md-4 control-label">Street</label>
-                      {{$shipping->street}}
+                      {{$address->street}}
                   </div>
 
                   <div class="form-group">
                     <label for="city" class="col-md-4 control-label">City, State</label>
-                      {{$shipping->city}}, {{$shipping->state}}
+                      {{$address->city}}, {{$address->state}}
                   </div>
 
                   <div class="form-group">
                     <label for="zipcode" class="col-md-4 control-label">Zipcode</label>
-                      {{$shipping->zipcode}}
+                      {{$address->zipcode}}
                   </div>
                 </div>
                 @endforeach
