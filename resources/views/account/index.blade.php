@@ -23,26 +23,18 @@
                         <label for="email" class="col-md-4 control-label">Email</label>
                           {{$user->email}}
                       </div>
-
-                      @if (!$address_exists)
-                      <div class="form-group">
-                        <label for="zipcode" class="col-md-4 control-label">Address</label>
-                          <a href="/account/address">Add a shipping address</a>
-                      </div>
-                      @endif
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@if ($address_exists)
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Shipping Addresses</div>
+                @if ($shipping->count() > 0)
                 @foreach ($shipping as $address)
                 <div class="panel-body">
                   <div class="form-group">
@@ -61,10 +53,16 @@
                   </div>
                 </div>
                 @endforeach
+
+                @else
+                <div class="form-group">
+                  <label for="zipcode" class="col-md-4 control-label"></label>
+                    <a href="/account/address">Add a shipping address</a>
+                </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
-@endif
 
 @endsection

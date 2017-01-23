@@ -26,17 +26,9 @@ class AccountController extends Controller
   {
     $user = User::Where('username', $request->User()->username)->first();
     $shipping = Address::Where('userID', $user->id)->get();
-    if ($shipping != NULL)
-    {
-      $address_exists = true;
-    }
-    else {
-      $address_exists = false;
-    }
     $details = [
       'user' => $user,
       'shipping' => $shipping,
-      'address_exists' => $address_exists
     ];
     return view('account.index')->with($details);
   }
