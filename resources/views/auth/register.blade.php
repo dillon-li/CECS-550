@@ -83,9 +83,9 @@
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">Gender</label>
                               <div class="col-md-6">
-                                  <label class="radio-inline"><input type="radio" name="gender" required>Male</label>
-                                  <label class="radio-inline"><input type="radio" name="gender">Female</label>
-                                  <label class="radio-inline"><input type="radio" name="gender">Not Specified</label>
+                                  <label class="radio-inline"><input type="radio" name="gender" value="Male" required>Male</label>
+                                  <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
+                                  <label class="radio-inline"><input type="radio" name="gender" value="NA">Not Specified</label>
                                   @if ($errors->has('gender'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('gender') }}</strong>

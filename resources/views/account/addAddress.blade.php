@@ -5,10 +5,24 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">Add a Shipping Address</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('account/address/add') }}">
                         {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Ship to: (name)</label>
+
+                            <div class="col-md-6">
+                                <input id="name" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="street" class="col-md-4 control-label">Street</label>
@@ -66,12 +80,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Add Shipping Address
-                                </button>
-                            </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-block btn-success" id="button"><span class="semibold">Add Shipping Address</span></button>
                         </div>
 
                     </form>

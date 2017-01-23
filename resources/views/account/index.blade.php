@@ -23,6 +23,15 @@
                         <label for="email" class="col-md-4 control-label">Email</label>
                           {{$user->email}}
                       </div>
+
+                      <div class="form-group">
+                        <label for="gender" class="col-md-4 control-label">Gender</label>
+                          @if($user->gender == "NA")
+                            Not Specified
+                          @else
+                            {{$user->gender}}
+                          @endif
+                      </div>
                 </div>
             </div>
         </div>
@@ -37,6 +46,11 @@
                 @if ($shipping->count() > 0)
                 @foreach ($shipping as $address)
                 <div class="panel-body">
+                  <div class="form-group">
+                    <label for="street" class="col-md-4 control-label">Ship to:</label>
+                      {{$address->name}}
+                  </div>
+
                   <div class="form-group">
                     <label for="street" class="col-md-4 control-label">Street</label>
                       {{$address->street}}
@@ -53,13 +67,12 @@
                   </div>
                 </div>
                 @endforeach
-
-                @else
-                <div class="form-group">
-                  <label for="zipcode" class="col-md-4 control-label"></label>
-                    <a href="/account/address">Add a shipping address</a>
-                </div>
                 @endif
+
+                    <div class="panel-footer">
+                       <a href="/account/address">Add a shipping address</a>
+                    </div>
+
             </div>
         </div>
     </div>

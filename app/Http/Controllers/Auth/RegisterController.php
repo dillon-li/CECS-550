@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'confirm_code' => $confirm_code,
+            'gender' => $data['gender']
         ]);
 
         Mail::send('email.verify', $confirmation_code, function($message) {

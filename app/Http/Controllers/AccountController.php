@@ -41,6 +41,7 @@ class AccountController extends Controller
   public function addAddress(Request $request)
   {
     $this->validate($request, [
+      'name' => 'required',
       'street' => 'required',
       'city' => 'required',
       'zipcode' => 'required'
@@ -49,6 +50,7 @@ class AccountController extends Controller
     Address::create(
       [
         'userID' => $request->user()->id,
+        'name' => $request->name,
         'street' => $request->street,
         'city' => $request->city,
         'state' => $request->state,
