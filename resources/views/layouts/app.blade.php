@@ -17,6 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
+    <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -40,7 +42,8 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        CECS 550 Project
+                      <span><img src="images/favicon.png" style="width:36px; height12px"/></span>
+                        <span>CECS 550 Project</span>
                     </a>
                 </div>
 
