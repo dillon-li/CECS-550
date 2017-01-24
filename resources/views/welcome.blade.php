@@ -100,6 +100,9 @@
                   </ul>
                 @else
                   <p>You are signed in!</p>
+                  <ul class="actions">
+                    <li><a href="/account" class="button alt scrolly big">Your Account</a></li>
+                  </ul>
                 @endif
             </div>
           </section>

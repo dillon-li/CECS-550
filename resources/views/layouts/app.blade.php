@@ -67,6 +67,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/home') }}">
+                                            Dashboard
+                                        </a>
                                         <a href="{{ url('/account') }}">
                                             Account
                                         </a>
