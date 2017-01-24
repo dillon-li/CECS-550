@@ -61,6 +61,27 @@ class AccountController extends Controller
     return redirect()->action('AccountController@index');
   }
 
+  public function editAddressPage($id)
+  {
+    $address = Address::Where('id', $id)->first();
+    $details = [
+      'address' => $address
+    ];
+    return view('account.editAddress')->with($details);
+  }
+
+  public function editAddress(Request $request, $id)
+  {
+    $address = Address::Where('id', $id)->first();
+    $address->street = $request->street;
+    $address->city = $request->city;
+    $address->state = $request->state;
+    $address->zipcode = $request->zipcode;
+    $address->save();
+
+    return redirect()->action('AccountController@index');
+  }
+
   public function editPage(Request $request)
   {
     $user = User::Where('username', $request->User()->username)->first();

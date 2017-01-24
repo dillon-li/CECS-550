@@ -72,7 +72,7 @@
                   </div>
                 </div>
                 <div class="panel-footer">
-                    <a href="address/edit/{{$address->id}}"><button class="btn btn-block btn-success" id="button"><span class="semibold">Edit this Address</span></button></a>
+                    <a href="account/address/edit/{{$address->id}}"><button class="btn btn-block btn-success" id="button"><span class="semibold">Edit this Address</span></button></a>
                 </div>
                 @endforeach
                 @endif

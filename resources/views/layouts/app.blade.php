@@ -42,7 +42,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                      <span><img src="images/favicon.png" style="width:36px; height12px"/></span>
+                      <span><img src="/images/favicon.png" style="width:36px; height12px"/></span>
                         <span>CECS 550 Project</span>
                     </a>
                 </div>
