@@ -22,5 +22,8 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'account'], function(){
   Route::get('/', 'AccountController@index');
   Route::get('/address', 'AccountController@addAddressPage');
-  Route::post('address/add', 'AccountController@addAddress');
+  Route::post('/address/add', 'AccountController@addAddress');
+  Route::patch('/address/edit/{address_id}', 'AccountController@editAddress');
+  Route::get('/edit', 'AccountController@editPage');
+  Route::post('/edit', 'AccountController@edit');
 });

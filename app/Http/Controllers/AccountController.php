@@ -5,6 +5,7 @@ namespace CECS550\Http\Controllers;
 use Illuminate\Http\Request;
 use CECS550\User;
 use CECS550\Address;
+use CECS550\Http\Requests\EditAccount;
 
 class AccountController extends Controller
 {
@@ -56,6 +57,27 @@ class AccountController extends Controller
         'state' => $request->state,
         'zipcode' => $request->zipcode
       ]);
+
+    return redirect()->action('AccountController@index');
+  }
+
+  public function editPage(Request $request)
+  {
+    $user = User::Where('username', $request->User()->username)->first();
+    $details = [
+      'user' => $user
+    ];
+    return view('account.edit')->with($details);
+  }
+
+  public function edit(EditAccount $request)
+  {
+    $user = User::Where('username', $request->User()->username)->first();
+    $user->name = $request->name;
+    $user->username = $request->username;
+    $user->email = $request->email;
+    $user->gender = $request->gender;
+    $user->save();
 
     return redirect()->action('AccountController@index');
   }
