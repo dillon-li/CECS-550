@@ -1,3 +1,7 @@
+Our CECS 550 Software Engineering project
+Basic Website for shopping for UofL Gear
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
