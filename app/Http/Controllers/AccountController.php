@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use CECS550\User;
 use CECS550\Address;
 use CECS550\Http\Requests\EditAccount;
+use Auth;
 
 class AccountController extends Controller
 {
@@ -31,6 +32,7 @@ class AccountController extends Controller
       'user' => $user,
       'shipping' => $shipping,
     ];
+
     return view('account.index')->with($details);
   }
 
