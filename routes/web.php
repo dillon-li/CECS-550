@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome');
 
 Auth::routes();
 
@@ -27,4 +25,10 @@ Route::group(['prefix' => 'account'], function(){
   Route::post('/address/edit/{address_id}', 'AccountController@editAddress');
   Route::get('/edit', 'AccountController@editPage');
   Route::post('/edit', 'AccountController@edit');
+});
+
+Route::group(['prefix' => 'product'], function(){
+  Route::get('/create', 'ProductController@createPage');
+  Route::post('/create', 'ProductController@create');
+  Route::get('/{id}/delete', 'ProductController@delete');
 });

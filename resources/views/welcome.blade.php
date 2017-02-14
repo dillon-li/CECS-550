@@ -280,20 +280,11 @@
           					<h2>What's new? (New product pics go below)</h2>
           			</header>
           									<div class="content">
-          										<div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div>
-                              <div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div><div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div><div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div><div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div><div class="media">
-          											<a href="#"><img src="" alt="" title="This right here is a caption." /></a>
-          										</div>
+                              @foreach($products as $product)
+          									    <div class="media">
+          											  <a href="#"><img src={{$product->metadata->img_path}} title="This right here is a caption." /></a>
+          										  </div>
+                              @endforeach
           									</div>
           									<!--<footer>
           										<a href="#" class="button big">View Other Products</a>

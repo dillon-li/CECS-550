@@ -28,11 +28,32 @@ class HomeController extends Controller
       if (Auth::user()->role == 'admin')
       {
         $users_all = User::all();
-        $details['users_all'] = $users_all;
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $products = \Stripe\Product::all();
+
+        $details = [
+          "users_all" => $users_all,
+          "products" => $products["data"]
+        ];
+
         return view('home')->with($details);
       }
       else {
         return view('home');
       }
+    }
+
+    // Homepage
+    public function welcome()
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      $products = \Stripe\Product::all();
+
+      $details = [
+        "products" => $products["data"]
+      ];
+
+      return view('welcome')->with($details);
     }
 }
