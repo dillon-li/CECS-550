@@ -43,17 +43,4 @@ class HomeController extends Controller
         return view('home');
       }
     }
-
-    // Homepage
-    public function welcome()
-    {
-      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-      $products = \Stripe\Product::all();
-
-      $details = [
-        "products" => $products["data"]
-      ];
-
-      return view('welcome')->with($details);
-    }
 }

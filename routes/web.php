@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome');
+Route::get('/', function() {
+  \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+  $products = \Stripe\Product::all();
+
+  $details = [
+    "products" => $products["data"]
+  ];
+
+  return view('welcome')->with($details);
+});
 
 Auth::routes();
 
