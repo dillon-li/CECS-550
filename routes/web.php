@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome');
+Route::get('/', function() {
+  \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+  $products = \Stripe\Product::all();
+
+  $details = [
+    "products" => $products["data"]
+  ];
+
+  return view('welcome')->with($details);
+});
 
 Auth::routes();
 
@@ -31,4 +40,6 @@ Route::group(['prefix' => 'product'], function(){
   Route::get('/create', 'ProductController@createPage');
   Route::post('/create', 'ProductController@create');
   Route::get('/{id}/delete', 'ProductController@delete');
+  Route::get('/{id}/edit', 'ProductController@editPage');
+  Route::post('{id}/edit', 'ProductController@edit');
 });

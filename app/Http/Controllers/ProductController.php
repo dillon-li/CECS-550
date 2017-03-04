@@ -4,6 +4,7 @@ namespace CECS550\Http\Controllers;
 
 use Illuminate\Http\Request;
 use File;
+use Product;
 
 class ProductController extends Controller
 {
@@ -49,4 +50,28 @@ class ProductController extends Controller
 
       return redirect()->action('HomeController@index');
     }
+
+    public function editPage($id)
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+      $product = \Stripe\Product::retrieve($id);
+      $details = [
+        "product" => $product
+      ];
+      return view('products.edit')->with($details);
+    }
+
+    public function edit($id, Request $request)
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+      $product = \Stripe\Product::retrieve($request->id);
+      $product["name"] = $request->name;
+      $product["caption"] = $request->description;
+      $product->save();
+
+      return redirect()->action('HomeController@index');
+    }
+
 }

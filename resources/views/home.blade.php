@@ -60,6 +60,7 @@
                           <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Description</th>
                             <th>Picture</th>
                             <th>Actions</th>
                           </tr>
@@ -68,6 +69,7 @@
                           @foreach($products as $product)
                             <td>{{$product->id}}</td>
                             <td>{{$product->name}}</td>
+                            <td>{{$product->caption}}</td>
                             <td>
                               <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$product->metadata->img_path}}></img>
                             </td>
