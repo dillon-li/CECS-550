@@ -69,6 +69,21 @@ class ProductController extends Controller
       $product = \Stripe\Product::retrieve($request->id);
       $product["name"] = $request->name;
       $product["caption"] = $request->description;
+
+      if ($request->hasFile('img'))
+      {
+        $filename = str_slug($request->name).'.'.$request->file('img')->getClientOriginalExtension();
+        $contents = $request->file('img');
+        $path = base_path().'/public/images/products';
+        $filepath = '/images/products/'.$filename;
+        if(file_exists($filepath))
+        {
+          File::delete($filepath);
+        }
+        $contents->move($path, $filename);
+        $product->metadata->img_path = $filepath; 
+      }
+
       $product->save();
 
       return redirect()->action('HomeController@index');

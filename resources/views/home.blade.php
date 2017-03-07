@@ -58,7 +58,6 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Picture</th>
@@ -67,8 +66,9 @@
                         </thead>
                         <tbody>
                           @foreach($products as $product)
-                            <td>{{$product->id}}</td>
-                            <td>{{$product->name}}</td>
+                            <a href="/product/{{$product->id}}" onclick="return confirm('Are you sure you want to delete this product?')">
+                              <td>{{$product->name}}</td>
+                            </a>
                             <td>{{$product->caption}}</td>
                             <td>
                               <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$product->metadata->img_path}}></img>
