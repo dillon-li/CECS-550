@@ -282,7 +282,7 @@
           									<div class="content">
                               @foreach($products as $product)
           									    <div class="media">
-          											  <a href="#"><img src={{$product->metadata->img_path}} title="This right here is a caption." /></a>
+          											  <a href="/product/{{$product->id}}"><img src={{$product->metadata->img_path}} title="This right here is a caption." /></a>
           										  </div>
                               @endforeach
           									</div>

@@ -52,6 +52,16 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                          <div class="col-md-6 col-md-offset-4">
+                            <a href="/product/addToCart/{{$skus[0]->id}}">
+                              <button type="button" class="btn btn-primary">
+                                <i class="fa fa-btn"></i> Add to Cart
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+
                         <hr><hr>
                         <?php $x = 0; ?>
                         @foreach($skus as $sku)
@@ -76,6 +86,16 @@
                                 {{ $sku->inventory->quantity }}
                               </div>
                           </div>
+
+                          <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                              <a href="/product/addToCart/{{$sku->id}}">
+                                <button type="button" class="btn btn-primary">
+                                  <i class="fa fa-btn"></i> Add to Cart
+                                </button>
+                              </a>
+                            </div>
+                          </div>
                           @endif
                           <?php $x = 10; ?>
                           <hr><hr>
@@ -88,11 +108,13 @@
                           </div>
                         </div>
 
+                        @if(Auth::user()->role == 'admin')
                         <a href="/product/{{$product->id}}/edit">
                           <button type="button" class="btn btn-primary">
                               <i class="fa fa-btn fa-pencil"></i> Edit
                           </button>
                         </a>
+                        @endif
 
                       </form>
                 </div>
