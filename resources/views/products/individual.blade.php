@@ -13,7 +13,7 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-6">
-                      <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$product->metadata->img_path}}></img>
+                      <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$skus[0]->metadata->img_path}}></img>
                     </div>
                   </div>
 
@@ -52,6 +52,7 @@
                             </div>
                         </div>
 
+                        <hr><hr>
                         <?php $x = 0; ?>
                         @foreach($skus as $sku)
                           @if($x != 0)
@@ -77,6 +78,7 @@
                           </div>
                           @endif
                           <?php $x = 10; ?>
+                          <hr><hr>
                         @endforeach
 
                         <div class="form-group">
@@ -85,6 +87,13 @@
                             <img id="preview" style="display:none; max-width:100%; max-height:100%" />
                           </div>
                         </div>
+
+                        <a href="/product/{{$product->id}}/edit">
+                          <button type="button" class="btn btn-primary">
+                              <i class="fa fa-btn fa-pencil"></i> Edit
+                          </button>
+                        </a>
+
                       </form>
                 </div>
             </div>

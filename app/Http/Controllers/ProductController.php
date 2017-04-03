@@ -26,29 +26,31 @@ class ProductController extends Controller
       $attributes = ["pic"];
 
       $files = $request->file('img');
-      //dd($files[0]);
 
-      $filename = str_slug($request->name).'_PRODUCT.'.$files[0]->getClientOriginalExtension();
-      $files[0]->move(base_path().'/public/images/products/'.$request->name.'/', $filename);
+      $filename = str_slug(preg_replace('/\s+/', '', $request->name).'_PRODUCT.'.$files[0]->getClientOriginalExtension());
+      $files[0]->move(base_path().'/public/images/products/'.preg_replace('/\s+/', '', $request->name).'/', $filename);
       $filepath = '/images/products/'.$request->name.'/'.$filename;
+      $filepath = preg_replace('/\s+/', '', $filepath);
+
       // Create Product
       $product = \Stripe\Product::create(array(
         "name" => $request->name,
         "description" => $request->description,
         "attributes" => $attributes,
         "metadata" => [
-          "img_path" => $filepath
+          "img_path" => $filepath,
+          "tags" => $request->tags
         ]));
 
         $sku = \Stripe\SKU::create(array(
           "product" => $product->id,
-          "price" => $request->price * 100,
+          "price" => $request->price[0] * 100,
           "inventory" => array(
             "type" => "finite",
             "quantity" => $request->stock[0]
           ),
           "attributes" => array(
-            "pic" => 0
+            "pic" => $filepath
           ),
           "currency" => "usd",
           "metadata" => [
@@ -59,19 +61,20 @@ class ProductController extends Controller
       foreach ($files as $file)
       {
         if ($count != 0) {
-          $filename = str_slug($request->name).$count.'.'.$file->getClientOriginalExtension();
-          $file->move(base_path().'/public/images/products/'.$request->name.'/', $filename);
+          $filename = str_slug(preg_replace('/\s+/', '', $request->name).$count.$file->getClientOriginalExtension());
+          $file->move(base_path().'/public/images/products/'.preg_replace('/\s+/', '', $request->name).'/', $filename);
           $filepath = '/images/products/'.$request->name.'/'.$filename;
+          $filepath = preg_replace('/\s+/', '', $filepath);
 
           $sku = \Stripe\SKU::create(array(
             "product" => $product->id,
-            "price" => $request->price * 100,
+            "price" => $request->price[$count] * 100,
             "inventory" => array(
               "type" => "finite",
               "quantity" => $request->stock[$count]
             ),
             "attributes" => array(
-              "pic" => $count
+              "pic" => $filepath
             ),
             "currency" => "usd",
             "metadata" => [
@@ -103,8 +106,10 @@ class ProductController extends Controller
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
       $product = \Stripe\Product::retrieve($id);
+      $skus = $product->skus->data;
       $details = [
-        "product" => $product
+        "product" => $product,
+        "skus" => $skus
       ];
       return view('products.edit')->with($details);
     }
@@ -114,24 +119,35 @@ class ProductController extends Controller
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
       $product = \Stripe\Product::retrieve($request->id);
+      $skus = $product->skus->data;
       $product["name"] = $request->name;
-      $product["caption"] = $request->description;
-
-      if ($request->hasFile('img'))
-      {
-        $filename = str_slug($request->name).'.'.$request->file('img')->getClientOriginalExtension();
-        $contents = $request->file('img');
-        $path = base_path().'/public/images/products';
-        $filepath = '/images/products/'.$filename;
-        if(file_exists($filepath))
-        {
-          File::delete($filepath);
-        }
-        $contents->move($path, $filename);
-        $product->metadata->img_path = $filepath;
-      }
-
+      $product["caption"] = $request->caption;
+      $product["description"] = $request->description;
+      $product->metadata["tags"] = $request->tags;
       $product->save();
+
+      foreach ($skus as $sku)
+      {
+        if ($request->hasFile($sku->id.'img'))
+        {
+          $file = $request->file($sku->id.'img');
+          $filename = preg_replace('/\s+/', '', $request->name)."/".$sku->id.".".$file->getClientOriginalExtension();
+          $path = base_path().'/public/images/products';
+          $filepath = '/images/products/'.$filename;
+          $filepath = preg_replace('/\s+/', '', $filepath);
+          if(file_exists($filepath))
+          {
+            File::delete($filepath);
+          }
+          $file->move(base_path().'/public/images/products/'.preg_replace('/\s+/', '', $request->name).'/', $filename);
+          $sku->metadata->img_path = $filepath;
+        }
+        $pricestr = $sku->id.'price';
+        $invstr = $sku->id.'stock';
+        $sku["price"] = $request->$pricestr * 100;
+        $sku->inventory["quantity"] = $request->$invstr;
+        $sku->save();
+      }
 
       return redirect()->action('HomeController@index');
     }

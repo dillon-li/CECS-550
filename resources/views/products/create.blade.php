@@ -38,11 +38,11 @@ input[type=number] {
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('caption') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Caption</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="caption" value="{{ old('caption') }}" required autofocus>
+                                <input id="caption" type="text" class="form-control" name="caption" value="{{ old('caption') }}" required autofocus>
 
                                 @if ($errors->has('caption'))
                                     <span class="help-block">
@@ -52,8 +52,8 @@ input[type=number] {
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Description</label>
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
                                 <textarea rows="4" cols="50" class="form-control" name="description" value="{{ old('description') }}" required autofocus></textarea>
@@ -61,6 +61,20 @@ input[type=number] {
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Tags (comma separated): </label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="tags" value="{{ old('tags') }}" placeholder="ex. hoodies,winter,cards" required autofocus>
+
+                                @if ($errors->has('tags'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tags') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -103,7 +117,7 @@ input[type=number] {
                           <label class="col-md-4 control-label">Price</label>
 
                           <div class="col-md-6">
-                            <input type="number" step="any" class="form-control" name="price" placeholder="ex. 12.00" value="{{ old('price') }}">
+                            <input type="number" step="any" class="form-control" name="price[]" placeholder="ex. 12.00" value="{{ old('price') }}">
 
                             @if ($errors->has('price'))
                             <span class="help-block">
