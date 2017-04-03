@@ -23,12 +23,14 @@ class ProductController extends Controller
 
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-      $attributes = ["size", "gender", "color"];
+      $attributes = ["pic"];
 
-      $filename = str_slug($request->name).'.'.$request->file('img')->getClientOriginalExtension();
-      $contents = $request->file('img');
-      $contents->move(base_path().'/public/images/products', $filename);
-      $filepath = '/images/products/'.$filename;
+      $files = $request->file('img');
+      //dd($files[0]);
+
+      $filename = str_slug($request->name).'_PRODUCT.'.$files[0]->getClientOriginalExtension();
+      $files[0]->move(base_path().'/public/images/products/'.$request->name.'/', $filename);
+      $filepath = '/images/products/'.$request->name.'/'.$filename;
       // Create Product
       $product = \Stripe\Product::create(array(
         "name" => $request->name,
@@ -36,8 +38,49 @@ class ProductController extends Controller
         "attributes" => $attributes,
         "metadata" => [
           "img_path" => $filepath
-          ]
-      ));
+        ]));
+
+        $sku = \Stripe\SKU::create(array(
+          "product" => $product->id,
+          "price" => $request->price * 100,
+          "inventory" => array(
+            "type" => "finite",
+            "quantity" => $request->stock[0]
+          ),
+          "attributes" => array(
+            "pic" => 0
+          ),
+          "currency" => "usd",
+          "metadata" => [
+            "img_path" => $filepath
+            ]));
+      // Create SKUs
+      $count = 0;
+      foreach ($files as $file)
+      {
+        if ($count != 0) {
+          $filename = str_slug($request->name).$count.'.'.$file->getClientOriginalExtension();
+          $file->move(base_path().'/public/images/products/'.$request->name.'/', $filename);
+          $filepath = '/images/products/'.$request->name.'/'.$filename;
+
+          $sku = \Stripe\SKU::create(array(
+            "product" => $product->id,
+            "price" => $request->price * 100,
+            "inventory" => array(
+              "type" => "finite",
+              "quantity" => $request->stock[$count]
+            ),
+            "attributes" => array(
+              "pic" => $count
+            ),
+            "currency" => "usd",
+            "metadata" => [
+              "img_path" => $filepath
+              ]));
+            }
+          $count = $count + 1;
+      }
+
       return redirect()->action('HomeController@index');
     }
 
@@ -46,6 +89,10 @@ class ProductController extends Controller
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
       $product = \Stripe\Product::retrieve($id);
+      foreach ($product->skus->data as $sku) {
+        $sku = \Stripe\SKU::retrieve($sku->id);
+        $sku->delete();
+      }
       $product->delete();
 
       return redirect()->action('HomeController@index');
@@ -81,12 +128,25 @@ class ProductController extends Controller
           File::delete($filepath);
         }
         $contents->move($path, $filename);
-        $product->metadata->img_path = $filepath; 
+        $product->metadata->img_path = $filepath;
       }
 
       $product->save();
 
       return redirect()->action('HomeController@index');
+    }
+
+    public function view($id)
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      $product = \Stripe\Product::retrieve($id);
+      $skus = $product->skus->data;
+
+      $details = [
+        "product" => $product,
+        "skus" => $skus
+      ];
+      return view('products.individual')->with($details);
     }
 
 }

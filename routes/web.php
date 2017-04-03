@@ -42,5 +42,5 @@ Route::group(['prefix' => 'product'], function(){
   Route::get('/{id}/delete', 'ProductController@delete');
   Route::get('/{id}/edit', 'ProductController@editPage');
   Route::post('{id}/edit', 'ProductController@edit');
-  Route::get('/{id}', 'ProductController@viewProduct');
+  Route::get('/{id}', 'ProductController@view');
 });
