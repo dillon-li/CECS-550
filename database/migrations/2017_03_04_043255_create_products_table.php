@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
         $table->string('stripe_id');
         $table->string('name');
       });
+    }
 
     /**
      * Reverse the migrations.
