@@ -33,8 +33,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function address()
+    {
+      return $this->hasMany('Address', 'userID');
+    }
+
     public function orders()
     {
-      return $this->hasMany('App\orders');
+      return $this->hasMany('orders');
     }
 }
