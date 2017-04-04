@@ -7,7 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Your Shopping Cart</div>
                 <div class="panel-body">
-
+                  @if ($content->count() == 0)
+                    Your shopping cart is empty
+                  @else
                         <?php // dd($content); ?>
                         <div class="table-responsive">
                           <table class="table">
@@ -50,4 +52,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

@@ -22,7 +22,7 @@ class ShopController extends Controller
         "subtotal" => str_replace(',', '', Cart::subtotal()) / 100
       ];
 
-      return view('account.cart')->with($details);
+      return view('shop.cart')->with($details);
     }
 
     public function addToCart($id)
@@ -35,4 +35,17 @@ class ShopController extends Controller
 
       return redirect()->action('ShopController@displayCart');
     }
+
+    public function paymentPage()
+    {
+      $content = Cart::content();
+      $details = [
+        "content" => $content,
+        "subtotal" => str_replace(',', '', Cart::subtotal()) / 100,
+        "total_cents" => str_replace(',', '', Cart::subtotal())
+      ];
+
+      return view('shop.payment')->with($details);
+    }
+
 }
