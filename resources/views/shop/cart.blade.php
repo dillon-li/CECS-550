@@ -31,7 +31,7 @@
                                 <td>{{ $cartItem->name }}</td>
                                 <td>{{ $cartItem->price / 100 }}</td>
                                 <td>{{ $cartItem->qty }}</td>
-                                <td><a href="/cart/delete/{$cartItem->rowId}"> Remove Item </a></td>
+                                <td><a href="/cart/delete/{{$cartItem->rowId}}"> Remove Item </a></td>
                               </tr>
                               @endforeach
                             </tbody>

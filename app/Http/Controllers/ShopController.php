@@ -36,6 +36,12 @@ class ShopController extends Controller
       return redirect()->action('ShopController@displayCart');
     }
 
+    public function removeFromCart($rowId)
+    {
+      Cart::remove($rowId);
+      return redirect()->action('ShopController@displayCart');
+    }
+
     public function paymentPage()
     {
       $content = Cart::content();
