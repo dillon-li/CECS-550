@@ -92,7 +92,44 @@
                       <button type="button" class="btn btn-primary">
                           <i class=""></i> Create New Product
                       </button>
+                    </a>
                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Your Past Orders</div>
+                  @if(isset($charges))
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Transaction ID</th>
+                          <th>Description</th>
+                          <th>No. Items Purchased</th>
+                          <th>Amount Charged</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($charges["data"] as $charge)
+                          <tr>
+                            <td>{{$charge->id}}</td>
+                            <td>{{$charge->description}}</td>
+                            <td></td>
+                            <td>{{$charge->amount}}</td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                  @else
+                    You have not ordered anything.
+                  @endif
+                <div class="panel-body">
+
                 </div>
             </div>
         </div>

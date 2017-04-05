@@ -53,7 +53,7 @@
                           </div>
                       </div>
 
-
+                      <input type="hidden" name="total" value= "{{$total_cents}}">
 
                       <div class="panel-footer">
                         <script
@@ -67,7 +67,7 @@
                           data-zip-code="true">
                         </script>
                       </div>
-                      
+
                     </form>
 
                 </div>

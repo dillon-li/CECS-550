@@ -49,5 +49,6 @@ Route::group(['prefix' => 'product'], function(){
 Route::group(['prefix' => 'cart'], function(){
   Route::get('/', 'ShopController@displayCart');
   Route::get('/payment', 'ShopController@paymentPage');
+  Route::post('/payment', 'ShopController@purchase');
   Route::get('/delete/{rowId}', 'ShopController@removeFromCart');
 });

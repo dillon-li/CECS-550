@@ -7,7 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Account Information</div>
                 <div class="panel-body">
-                        {{ csrf_field() }}
 
                       <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Name</label>

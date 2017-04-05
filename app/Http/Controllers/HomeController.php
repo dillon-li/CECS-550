@@ -37,9 +37,29 @@ class HomeController extends Controller
           "products" => $products["data"]
         ];
 
+        if (Auth::user()->stripe_id != null)
+        {
+          $user = Auth::user();
+          \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+          $charges = \Stripe\Charge::all(array("customer" => $user->stripe_id));
+          $details["charges"] = $charges;
+        }
+
         return view('home')->with($details);
       }
       else {
+        if ($user->stripe_id != null)
+        {
+          $user = Auth::user();
+          \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+          $charges = \Stripe\Charge::all(array("customer" => $user->stripe_id));
+          $details = [
+            "user" => $user,
+            "charges" => $charges
+          ];
+          return view('home')->with($details);
+        }
+
         return view('home');
       }
     }

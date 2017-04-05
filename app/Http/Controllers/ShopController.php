@@ -4,6 +4,7 @@ namespace CECS550\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Cart;
+use Auth;
 
 class ShopController extends Controller
 {
@@ -11,6 +12,7 @@ class ShopController extends Controller
     {
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
       $content = Cart::content();
+
       foreach ($content as $cartItem)
       {
         $sku = \Stripe\SKU::retrieve($cartItem->id);
@@ -54,4 +56,39 @@ class ShopController extends Controller
       return view('shop.payment')->with($details);
     }
 
+    public function purchase(Request $request)
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+      // Token is created using Stripe.js or Checkout!
+      // Get the payment token submitted by the form:
+      $user = Auth::user();
+
+      if ($user->stripe_token == null)
+      {
+        $token = $_POST['stripeToken'];
+
+        // Create a Customer:
+        $customer = \Stripe\Customer::create(array(
+          "email" => $user->email,
+          "source" => $token,
+        ));
+        $user->stripe_id = $customer->id;
+        $user->stripe_token = $token;
+        $user->save();
+      }
+      else {
+        $customer = \Stripe\Customer::retrieve($user->stripe_id);
+      }
+
+      $charge = \Stripe\Charge::create(array(
+        "amount" => $request->total, // $15.00 this time
+        "currency" => "usd",
+        "customer" => $customer->id,
+        // ADD DESCRIPTION HERE TO DISPLAY TO USER
+      ));
+
+      Cart::destroy();
+
+    }
 }
