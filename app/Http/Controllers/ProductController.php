@@ -162,6 +162,7 @@ class ProductController extends Controller
         "product" => $product,
         "skus" => $skus
       ];
+
       return view('products.individual')->with($details);
     }
 

@@ -108,7 +108,7 @@
                           </div>
                         </div>
 
-                        @if(Auth::user()->role == 'admin')
+                        @if((!Auth::guest()) && (Auth::user()->role == 'admin'))
                         <a href="/product/{{$product->id}}/edit">
                           <button type="button" class="btn btn-primary">
                               <i class="fa fa-btn fa-pencil"></i> Edit
