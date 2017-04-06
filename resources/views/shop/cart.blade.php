@@ -17,6 +17,7 @@
                               <tr>
                                 <th></th>
                                 <th>Name</th>
+                                <th>Variety</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th></th>
@@ -29,6 +30,7 @@
                                   <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$cartItem->pic}}></img>
                                 </td>
                                 <td>{{ $cartItem->name }}</td>
+                                <td>{{ $cartItem->sku_description }}</td>
                                 <td>{{ $cartItem->price / 100 }}</td>
                                 <td>{{ $cartItem->qty }}</td>
                                 <td><a href="/cart/delete/{{$cartItem->rowId}}"> Remove Item </a></td>

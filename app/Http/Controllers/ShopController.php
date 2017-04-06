@@ -17,6 +17,7 @@ class ShopController extends Controller
       {
         $sku = \Stripe\SKU::retrieve($cartItem->id);
         $cartItem->pic = $sku->metadata->img_path;
+        $cartItem->sku_description = $sku->metadata->description;
       }
 
       $details = [
@@ -50,7 +51,7 @@ class ShopController extends Controller
       $details = [
         "content" => $content,
         "subtotal" => str_replace(',', '', Cart::subtotal()) / 100,
-        "total_cents" => str_replace(',', '', Cart::subtotal())
+        "total_cents" => intval(str_replace(',', '', Cart::subtotal()))
       ];
 
       return view('shop.payment')->with($details);
@@ -90,5 +91,6 @@ class ShopController extends Controller
 
       Cart::destroy();
 
+      return redirect()->action('HomeController@index');
     }
 }

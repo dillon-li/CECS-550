@@ -39,6 +39,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-md-4 control-label">Variety:</label>
+                            <div class="col-md-6">
+                              {{ $skus[0]->metadata->description}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Price:</label>
                             <div class="col-md-6">
                               {{ $skus[0]->price / 100}}
@@ -74,14 +81,21 @@
                           </div>
 
                           <div class="form-group">
-                              <label for="name" class="col-md-4 control-label">Price:</label>
+                              <label class="col-md-4 control-label">Variety:</label>
+                              <div class="col-md-6">
+                                {{ $sku->metadata->description}}
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-md-4 control-label">Price:</label>
                               <div class="col-md-6">
                                 {{ $sku->price / 100}}
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label for="name" class="col-md-4 control-label">Current Stock:</label>
+                              <label class="col-md-4 control-label">Current Stock:</label>
                               <div class="col-md-6">
                                 {{ $sku->inventory->quantity }}
                               </div>

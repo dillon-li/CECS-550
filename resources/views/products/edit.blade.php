@@ -56,7 +56,7 @@ input[type=number] {
                             <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
-                                <textarea rows="4" cols="50" class="form-control" name="description" value="{{ old('description') }}" required autofocus>{{ $product->description }}</textarea>
+                                <textarea rows="4" cols="50" class="form-control" name="description" required autofocus>{{ $product->description }}</textarea>
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -96,6 +96,20 @@ input[type=number] {
                           <div class="col-md-6">
                             <input type="file" name="{{$sku->id.'img'}}" id="img">
                           </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Description</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="sku_description" value="{{ old('sku_description') }}" placeholder="ex. Red, black, small, large, etc." required autofocus>
+
+                                @if ($errors->has('sku_description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sku_description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('stock') ? ' has-error' : '' }}">

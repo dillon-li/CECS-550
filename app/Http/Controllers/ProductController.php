@@ -35,6 +35,7 @@ class ProductController extends Controller
       // Create Product
       $product = \Stripe\Product::create(array(
         "name" => $request->name,
+        "caption" => $request->caption,
         "description" => $request->description,
         "attributes" => $attributes,
         "metadata" => [
@@ -54,7 +55,8 @@ class ProductController extends Controller
           ),
           "currency" => "usd",
           "metadata" => [
-            "img_path" => $filepath
+            "img_path" => $filepath,
+            "description" => $request->sku_description[0]
             ]));
       // Create SKUs
       $count = 0;
@@ -78,7 +80,8 @@ class ProductController extends Controller
             ),
             "currency" => "usd",
             "metadata" => [
-              "img_path" => $filepath
+              "img_path" => $filepath,
+              "description" => $request->sku_description[$count]
               ]));
             }
           $count = $count + 1;
@@ -146,6 +149,7 @@ class ProductController extends Controller
         $invstr = $sku->id.'stock';
         $sku["price"] = $request->$pricestr * 100;
         $sku->inventory["quantity"] = $request->$invstr;
+        $sku->metadata->description = $request->sku_description;
         $sku->save();
       }
 
