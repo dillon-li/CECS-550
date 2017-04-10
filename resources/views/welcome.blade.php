@@ -277,12 +277,12 @@
           	<!-- Photo Galleries -->
           		<div class="gallery">
           			<header class="special">
-          					<h2>What's new? (New product pics go below)</h2>
+          					<h2>Our Products:</h2>
           			</header>
           									<div class="content">
-                              @foreach($products as $product)
+                              @foreach(\CECS550\Product::$categories as $category)
           									    <div class="media">
-          											  <a href="/product/{{$product->id}}"><img src={{$product->metadata->img_path}} /></a>
+          											  <a href="/product/view/{{$category['name']}}"><img src={{$category['pic']}} /></a>
           										  </div>
                               @endforeach
           									</div>

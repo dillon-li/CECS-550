@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration
         $table->increments('id');
         $table->string('stripe_id');
         $table->string('name');
+        $table->string('category');
+        $table->string('category_pic');
       });
     }
 

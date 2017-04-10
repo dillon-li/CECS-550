@@ -67,6 +67,20 @@ input[type=number] {
                         </div>
 
                         <div class="form-group">
+                            <label for="description" class="col-md-4 control-label">Category</label>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <select class="form-control" name="category">
+                                    @foreach(\CECS550\Product::$categories as $category)
+                                      <option name="category" value="{{$category['name']}}">{{$category['name']}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                            </div>
+                          </div>
+
+                        <div class="form-group">
                             <label class="col-md-4 control-label">Tags (comma separated): </label>
 
                             <div class="col-md-6">

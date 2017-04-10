@@ -4,7 +4,7 @@ namespace CECS550\Http\Controllers;
 
 use Illuminate\Http\Request;
 use File;
-use Product;
+use CECS550\Product;
 
 class ProductController extends Controller
 {
@@ -42,6 +42,31 @@ class ProductController extends Controller
           "img_path" => $filepath,
           "tags" => $request->tags
         ]));
+
+        switch ($request->category) {
+          case "Headgear":
+            $category_pic = base_path().'/public/images/categories/cap.jpg';
+            break;
+          case "Pants":
+            $category_pic = base_path().'/public/images/categories/pants2.jpg';
+            break;
+          case "Shirts":
+            $category_pic = base_path().'/public/images/categories/tees.jpg';
+            break;
+          case "Footwear":
+            $category_pic = base_path().'/public/images/categories/footware1.jpg';
+            break;
+          case "Miscellaneous":
+            $category_pic = base_path().'/public/images/categories/tees7.jpg';
+            break;
+        }
+
+        Product::create([
+          'name' => $request->name,
+          'stripe_id' => $product->id,
+          'category' => $request->category,
+          'category_pic' => $category_pic
+        ]);
 
         $sku = \Stripe\SKU::create(array(
           "product" => $product->id,
@@ -101,6 +126,9 @@ class ProductController extends Controller
       }
       $product->delete();
 
+      $product_db = Product::where('stripe_id', $id)->first();
+      $product_db->delete();
+
       return redirect()->action('HomeController@index');
     }
 
@@ -128,6 +156,29 @@ class ProductController extends Controller
       $product["description"] = $request->description;
       $product->metadata["tags"] = $request->tags;
       $product->save();
+
+      switch ($request->category) {
+        case "Headgear":
+          $category_pic = base_path().'/public/images/categories/cap.jpg';
+          break;
+        case "Pants":
+          $category_pic = base_path().'/public/images/categories/pants2.jpg';
+          break;
+        case "Shirts":
+          $category_pic = base_path().'/public/images/categories/tees.jpg';
+          break;
+        case "Footwear":
+          $category_pic = base_path().'/public/images/categories/footware1.jpg';
+          break;
+        case "Miscellaneous":
+          $category_pic = base_path().'/public/images/categories/tees7.jpg';
+          break;
+      }
+
+      $product_db = Product::where('stripe_id', $request->id)->first();
+      $product_db['category'] = $request->category;
+      $product_bd['category_pic'] = $category_pic;
+      $product_db->save();
 
       foreach ($skus as $sku)
       {
@@ -168,6 +219,31 @@ class ProductController extends Controller
       ];
 
       return view('products.individual')->with($details);
+    }
+
+    public function viewCategory($category)
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      $products_db = Product::where('category', $category)->get();
+      if ($products_db->count() == 0)
+      {
+        $products = 0;
+      }
+      else {
+        $count = 0;
+        foreach ($products_db as $p)
+        {
+          $products[$count] = \Stripe\Product::retrieve($p->stripe_id);
+          $count++;
+        }
+      }
+
+      $details = [
+        "products" => $products,
+        "category" => $category
+      ];
+
+      return view('products.category')->with($details);
     }
 
 }
