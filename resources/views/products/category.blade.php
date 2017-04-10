@@ -16,14 +16,16 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-6">
-                      <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$product->metadata->img_path}}></img>
+                        <img style="width:250px; height:250px; text-align:center; vertical-align:middle" src={{$product->metadata->img_path}}></img>
                     </div>
                   </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name:</label>
                             <div class="col-md-6">
+                              <a href="/product/{{$product->id}}">
                                 {{ $product->name }}
+                              </a>
                             </div>
                         </div>
 

@@ -158,10 +158,16 @@
                   <ul class="actions">
                     <li><a href="/login" class="button alt scrolly big">Sign In</a></li>
                   </ul>
+                  <ul>
+                    <li><a href="/product/view/category/all" class="button alt scrolly big">Browse all products</a></li>
+                  </ul>
                 @else
                   <p>You are signed in!</p>
                   <ul class="actions">
                     <li><a href="/home" class="button alt scrolly big">Your Account</a></li>
+                  </ul>
+                  <ul>
+                    <li><a href="/product/view/category/all" class="button alt scrolly big">Browse all products</a></li>
                   </ul>
                 @endif
             </div>

@@ -246,4 +246,17 @@ class ProductController extends Controller
       return view('products.category')->with($details);
     }
 
+    public function viewAll()
+    {
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      $products = \Stripe\Product::all();
+
+      $details = [
+        "products" => $products,
+        "category" => "All"
+      ];
+
+      return view('products.category')->with($details);
+    }
+
 }
