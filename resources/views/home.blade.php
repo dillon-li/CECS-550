@@ -121,7 +121,7 @@
                             <td>{{$charge->id}}</td>
                             <td>{{$charge->description}}</td>
                             <td></td>
-                            <td>{{$charge->amount}}</td>
+                            <td>{{$charge->amount / 100}}</td>
                           </tr>
                         @endforeach
                       </tbody>

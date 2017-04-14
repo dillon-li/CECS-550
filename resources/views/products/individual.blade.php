@@ -100,7 +100,7 @@
                                 {{ $sku->inventory->quantity }}
                               </div>
                           </div>
-
+                          @if(!Auth::guest())
                             <div class="form-group">
                               <div class="col-md-6 col-md-offset-4">
                                 <a href="/product/addToCart/{{$sku->id}}">
@@ -110,6 +110,18 @@
                                 </a>
                               </div>
                             </div>
+                          @else
+                            <div class="form-group">
+                              <div class="col-md-6 col-md-offset-4">
+                                <a href="/login">
+                                  <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-btn"></i> Sign in to purchase
+                                  </button>
+                                </a>
+                              </div>
+                            </div>
+                          @endif
+                          
                           @endif
                           <?php $x = 10; ?>
                           <hr><hr>
