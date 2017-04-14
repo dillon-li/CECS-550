@@ -33,14 +33,9 @@ class Product extends Model
       'pic' => '/images/categories/tees.jpg'
     ],
     [
-      'id' =>4,
-      'name' => 'Footwear',
-      'pic' => '/images/categories/footware1.jpg'
-    ],
-    [
-      'id' => 5,
+      'id' => 4,
       'name' => "Miscellaneous",
-      'pic' => '/images/categories/tees7.jpg'
+      'pic' => '/images/categories/footware.jpg'
     ]
   ];
 

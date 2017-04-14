@@ -101,15 +101,15 @@
                               </div>
                           </div>
 
-                          <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                              <a href="/product/addToCart/{{$sku->id}}">
-                                <button type="button" class="btn btn-primary">
-                                  <i class="fa fa-btn"></i> Add to Cart
-                                </button>
-                              </a>
+                            <div class="form-group">
+                              <div class="col-md-6 col-md-offset-4">
+                                <a href="/product/addToCart/{{$sku->id}}">
+                                  <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-btn"></i> Add to Cart
+                                  </button>
+                                </a>
+                              </div>
                             </div>
-                          </div>
                           @endif
                           <?php $x = 10; ?>
                           <hr><hr>
