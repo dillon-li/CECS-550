@@ -5,6 +5,8 @@ namespace CECS550\Http\Controllers;
 use Illuminate\Http\Request;
 use Cart;
 use Auth;
+use Notification;
+use CECS550\Notifications\purchased;
 
 class ShopController extends Controller
 {
@@ -86,8 +88,10 @@ class ShopController extends Controller
         "amount" => $request->total, // $15.00 this time
         "currency" => "usd",
         "customer" => $customer->id,
-        // ADD DESCRIPTION HERE TO DISPLAY TO USER
+        "description" => Cart::count()
       ));
+
+      Notification::send($user, new purchased($charge));
 
       Cart::destroy();
 

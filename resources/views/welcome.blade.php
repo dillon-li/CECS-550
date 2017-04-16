@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Styles -->
         <link href="/css/app.css" rel="stylesheet">
@@ -20,65 +22,6 @@
 
         <!-- Styles -->
         <style>
-            /* jssor slider bullet navigator skin 01 css */
-            /*
-            .jssorb01 div           (normal)
-            .jssorb01 div:hover     (normal mouseover)
-            .jssorb01 .av           (active)
-            .jssorb01 .av:hover     (active mouseover)
-            .jssorb01 .dn           (mousedown)
-            */
-            /*
-            .jssorb01 {
-                position: absolute;
-            }
-            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
-                position: absolute;
-                width: 12px;
-                height: 12px;
-                filter: alpha(opacity=70);
-                opacity: .7;
-                overflow: hidden;
-                cursor: pointer;
-                border: #000 1px solid;
-            }
-
-            .jssorb01 div { background-color: gray; }
-            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
-            .jssorb01 .av { background-color: #fff; }
-            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
-
-            /* jssor slider arrow navigator skin 02 css */
-            /*
-            .jssora02l                  (normal)
-            .jssora02r                  (normal)
-            .jssora02l:hover            (normal mouseover)
-            .jssora02r:hover            (normal mouseover)
-            .jssora02l.jssora02ldn      (mousedown)
-            .jssora02r.jssora02rdn      (mousedown)
-            .jssora02l.jssora02lds      (disabled)
-            .jssora02r.jssora02rds      (disabled)
-            */
-            /*
-            .jssora02l, .jssora02r {
-                display: block;
-                position: absolute;
-                width: 55px;
-                height: 55px;
-                cursor: pointer;
-                background: url('img/a02.png') no-repeat;
-                overflow: hidden;
-            }
-            .jssora02l { background-position: -3px -33px; }
-            .jssora02r { background-position: -63px -33px; }
-            .jssora02l:hover { background-position: -123px -33px; }
-            .jssora02r:hover { background-position: -183px -33px; }
-            .jssora02l.jssora02ldn { background-position: -3px -33px; }
-            .jssora02r.jssora02rdn { background-position: -63px -33px; }
-            .jssora02l.jssora02lds { background-position: -3px -33px; opacity: .3; pointer-events: none; }
-            .jssora02r.jssora02rds { background-position: -63px -33px; opacity: .3; pointer-events: none; }
-
-            */
 
             html, body {
                 background-color: #fff;
@@ -142,6 +85,12 @@
               font-family:showcard Gothic;
             }
         </style>
+
+        <script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
     </head>
 
     <body>
@@ -165,13 +114,23 @@
                           <li><a href="/cart">Cart ({{Cart::count()}})</a></li>
                           <li><a href="/home">Dashboard</a></li>
                           <li><a href="/account">Account</a></li>
-                          <li><a href="/logout">Logout</a></li>
+                          <li>
+                            <a href="{{ url('/logout') }}"
+                              onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                 logout
+                            </a>
+                          </li>
+                          <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
                       @endif
 										</ul>
 									</div>
 								</li>
 							</ul>
 						</nav>
+
 					</header>
 
 				<!-- Main -->
@@ -189,7 +148,6 @@
 									<div class="box alt">
 										<div class="row uniform 50%">
                       @foreach(\CECS550\Product::$categories as $category)
-
 											    <div class="3u"><span class="image fit"><a href="/product/view/{{$category['name']}}"><img src={{$category['pic']}} alt="" /></a></span></div>
                       @endforeach
 											<hr />

@@ -6,6 +6,8 @@ use CECS550\User;
 use CECS550\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Notification;
+use CECS550\Notifications\registered;
 
 class RegisterController extends Controller
 {
@@ -64,7 +66,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
       $confirm_code = str_random(30);
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
@@ -73,9 +75,14 @@ class RegisterController extends Controller
             'gender' => $data['gender']
         ]);
 
+        Notification::send($user, new registered($user));
+
+        return $user;
+        /*
         Mail::send('email.verify', $confirmation_code, function($message) {
             $message->to(Input::get('email'), Input::get('username'))
                 ->subject('Verify your email address');
         });
+        */
     }
 }

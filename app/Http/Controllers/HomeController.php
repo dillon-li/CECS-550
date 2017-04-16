@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+      $user = Auth::user();
       if (Auth::user()->role == 'admin')
       {
         $users_all = User::all();
@@ -50,7 +51,6 @@ class HomeController extends Controller
       else {
         if ($user->stripe_id != null)
         {
-          $user = Auth::user();
           \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
           $charges = \Stripe\Charge::all(array("customer" => $user->stripe_id));
           $details = [
