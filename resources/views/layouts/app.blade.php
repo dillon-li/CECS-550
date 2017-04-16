@@ -61,6 +61,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                          <li>
+                            <a href="{{ url('/') }}">
+                                BROWSE
+                            </a>
+                          </li>
                         @if (Auth::guest())
                             <li>
                               <a href="{{ url('/cart') }}">
