@@ -138,7 +138,14 @@
 						<header>
 							<h2>Cardinal Gear Shop</h2>
 							<p style="color:white">Your Source for Supporting the Cards</p>
+              <p>
+                <!--
+                <a href="/product/view/category/all">
+                  <button type="button">View all products</button>
+                </a> -->
+              </p>
 						</header>
+
 						<section class="wrapper style5">
 							<div class="inner">
 

@@ -250,7 +250,7 @@ class ProductController extends Controller
     {
       \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
       $products = \Stripe\Product::all();
-
+      
       $details = [
         "products" => $products,
         "category" => "All"
