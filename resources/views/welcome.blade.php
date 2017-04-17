@@ -137,7 +137,7 @@
 					<article id="main">
 						<header>
 							<h2>Cardinal Gear Shop</h2>
-							<p>Your Source for Supporting the Cards</p>
+							<p style="color:white">Your Source for Supporting the Cards</p>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
