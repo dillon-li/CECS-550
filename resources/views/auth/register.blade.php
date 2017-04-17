@@ -1,111 +1,154 @@
-@extends('layouts.app')
+<!DOCTYPE HTML>
+<!--
+    Spectral by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>SIGN UP</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="css/main2.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!-- Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    </head>
+    <body>
 
-@section('content')
+        <!-- Page Wrapper -->
+            <div id="page-wrapper">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="text-align:center">Create a new account</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
+                <!-- Header -->
+                    <header id="header">
+                        <h1><a href="index.html">UOFL</a></h1>
+                        <nav id="nav">
+                            <ul>
+                                <li class="special">
+                                    <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                                    <div id="menu">
+                                        <ul>
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="generic.html">Generic</a></li>
+                                            <li><a href="elements.html">Elements</a></li>
+                                            <li><a href="signup.html">Sign Up</a></li>
+                                            <li><a href="login.html">Log In</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </header>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                <!-- Main -->
+                    <article id="main">
+                        <header>
+                            <h2>Sign up</h2>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                        </header>
+                        <section class="wrapper style5">
+                            <div class="inner">
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <section>
+
+                                    <center>
+                                    <h2>Create new account:</h2>
+                                    </center>
+
+                                </section>
+
+                                <section>
+
+                                    <div class="row">
+
+
+                                    </div>
+
+
+                                </section>
+
+
+
+
+
+                                <section>
+                                <center>
+                                    <form method="post" action="{{ url('/register') }}">
+                    {{ csrf_field() }}
+                                        <div class="column uniform">
+                                            <br/>
+                                            <div class="6u 12u$(xsmall)">
+                                                <input type="text" name="name" id="demo-name" value="{{old('name')}}" placeholder="Name" />
+                                            </div>
+                                                    <br/>
+                                            <div class="6u$ 12u$(xsmall)">
+                                                <input type="email" name="email" id="demo-email" value="{{old('email')}}" placeholder="Email" />
+                                            </div>
+
+                                            <br/>
+                                            <div class="6u 12u$(xsmall)">
+                                                <input type="text" name="username" id="demo-username" value="{{old('username')}}" placeholder="UserName" />
+                                            </div>
+                                            <br/>
+                                            <div class="6u$ 12u$(xsmall)">
+                                                <input type="password" name="password" id="demo-password" value="" placeholder="Password" />
+                                            </div>
+                                            <br/>
+                                            <div class="6u$ 12u$(xsmall)">
+                                                <input type="password" name="password_confirmation" id="demo-cpassword" value="" placeholder="ConfirmPassword" />
+                                            </div>
+                                        </center>
+
+                                            <center>
+                                            <div class="4u 12u$(small)">
+                                                Gender:<input type="radio" id="demo-priority-low" name="gender" checked>
+                                                <label for="demo-priority-low">Male</label>
+                                                <input type="radio" id="demo-priority-normal" name="gender">
+                                                <label for="demo-priority-normal">Female</label>
+                                                <input type="radio" id="demo-priority-high" name="gender">
+                                                <label for="demo-priority-high">NotSpecifed</label>
+                                            </div>
+                                            </center>
+                                            <center>
+                                            <div class="6u 12u$(medium)">
+                                            <ul class="actions vertical">
+                                            <button type="submit" class="button special fit">Sign up
+
+                                            </ul>
+
+                                        </div>
+                                            </center>
+                                        </div>
+                                    </form>
+                                </section>
+
+
+
                             </div>
-                        </div>
+                        </section>
+                    </article>
 
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Username</label>
+                <!-- Footer -->
+                    <footer id="footer">
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                        <ul class="copyright">
+                            <li>&copy; Cardinal Gear Shop</li>
+                        </ul>
+                    </footer>
 
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                            <label for="gender" class="col-md-4 control-label">Gender</label>
-                              <div class="col-md-6">
-                                  <label class="radio-inline"><input type="radio" name="gender" value="Male" required>Male</label>
-                                  <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
-                                  <label class="radio-inline"><input type="radio" name="gender" value="NA">Not Specified</label>
-                                  @if ($errors->has('gender'))
-                                      <span class="help-block">
-                                          <strong>{{ $errors->first('gender') }}</strong>
-                                      </span>
-                                  @endif
-                              </div>
-                            </div>
-
-                        <div class="panel-footer">
-                            <button type="submit" class="btn btn-block btn-success" id="button"><span class="semibold">Sign up</span></button>
-                        </div>
-
-                        <p class="text-center">
-                            <span class="text-muted">Already have an account? <a class="semibold" href="/login">Sign in here</a></span>
-                        </p>
-
-                    </form>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/skel.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>

@@ -36,7 +36,10 @@ class ShopController extends Controller
       $sku = \Stripe\SKU::retrieve($id);
       $product = \Stripe\Product::retrieve($sku->product);
 
-      Cart::add($id, $product->name, 1, $sku->price);
+      if ($sku->inventory->quantity >= 1)
+      {
+        Cart::add($id, $product->name, 1, $sku->price);
+      }
 
       return redirect()->action('ShopController@displayCart');
     }
@@ -85,13 +88,24 @@ class ShopController extends Controller
       }
 
       $charge = \Stripe\Charge::create(array(
-        "amount" => $request->total, // $15.00 this time
+        "amount" => $request->total,
         "currency" => "usd",
         "customer" => $customer->id,
         "description" => Cart::count()
       ));
 
       Notification::send($user, new purchased($charge));
+
+      $cartItems = Cart::content();
+      foreach ($cartItems as $cartItem)
+      {
+        $sku = \Stripe\SKU::retrieve($cartItem->id);
+        if ($sku->inventory->quantity > $cartItem->qty)
+        {
+          $sku->inventory->quantity = $sku->inventory->quantity - $cartItem->qty;
+          $sku->save();
+        }
+      }
 
       Cart::destroy();
 
