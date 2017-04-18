@@ -18,7 +18,7 @@
 
         <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
 
-        <title>Laravel</title>
+        <title>Cardinal Gear Shop</title>
 
         <!-- Styles -->
         <style>
@@ -139,10 +139,10 @@
 							<h2>Cardinal Gear Shop</h2>
 							<p style="color:white">Your Source for Supporting the Cards</p>
               <p>
-                <!--
+
                 <a href="/product/view/category/all">
                   <button type="button">View all products</button>
-                </a> -->
+                </a> 
               </p>
 						</header>
 
