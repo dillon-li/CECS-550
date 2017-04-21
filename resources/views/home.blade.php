@@ -18,7 +18,7 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Actions</th>
+                          <!--  <th>Actions</th> -->
                           </tr>
                         </thead>
                         <tbody>
@@ -28,6 +28,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
+                            <!--
                             @if($user->role != 'admin')
                             <td>
                               <a href="/account/{{$user->id}}/ban" onclick="return confirm('Are you sure you want to ban this account?')">
@@ -37,6 +38,7 @@
                               </a>
                             </td>
                             @endif
+                          -->
                           </tr>
                           @endforeach
                         </tbody>
