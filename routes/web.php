@@ -24,6 +24,8 @@ Route::get('/', function() {
 
 Auth::routes();
 
+Route::get('logout', '\CECS550\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'account'], function(){

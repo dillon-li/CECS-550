@@ -15,6 +15,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
+        <!-- JavaScripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
 
@@ -115,15 +118,11 @@
                           <li><a href="/home">Dashboard</a></li>
                           <li><a href="/account">Account</a></li>
                           <li>
-                            <a href="{{ url('/logout') }}"
-                              onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                                 logout
+                            <a href="{{ url('/logout') }}">
+                                Logout
                             </a>
                           </li>
-                          <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                              {{ csrf_field() }}
-                          </form>
+
                       @endif
 										</ul>
 									</div>
@@ -142,7 +141,7 @@
 
                 <a href="/product/view/category/all">
                   <button type="button">View all products</button>
-                </a> 
+                </a>
               </p>
 						</header>
 
@@ -186,6 +185,8 @@
 			<script src="/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="/js/main.js"></script>
+
+
 
 	</body>
 </html>
